@@ -19,8 +19,7 @@ int main(void) {
         eachChar == '!') {
       endChar = eachChar;
       break;
-    }
-    else {}
+    } else {}
   }
 
   eachEndIdx = i - 2;
