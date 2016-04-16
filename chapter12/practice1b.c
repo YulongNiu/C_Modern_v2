@@ -28,3 +28,4 @@ void RevPrint(int *a, int *last) {
   printf("\n");
 
 }
+
