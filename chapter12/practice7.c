@@ -1,38 +1,62 @@
 #include <stdio.h>
 
-#define LEN 5
+#define WORDNUM 100
+#define MAXWORDLEN 20
 
-void max_min(int *a, int *last, int *max, int *min);
+void RevPrint(int *charAarry, int (*word)[2], int (*last)[2]);
 
 int main(void)
 {
-  int inputA[LEN];
-  int *p;
+  int word[WORDNUM][2];
+  int (*wordIdx)[2] = word;
+  int inputChar[WORDNUM * MAXWORDLEN];
+  int *inputIdx = inputChar;
+  char eachChar, endChar;
 
-  for (p = inputA; p < inputA + LEN; ++p) {
-    scanf("%d", p);
+  (*wordIdx)[0] = 0;
+
+  for (; ; ++inputIdx) {
+
+    eachChar = getchar();
+
+    if (eachChar == '.' ||
+        eachChar == '?' ||
+        eachChar == '!') {
+      endChar = eachChar;
+      (*wordIdx)[1] = inputIdx - inputChar - 1;
+      break;
+    } else {
+      *inputIdx = eachChar;
+    }
+
+    if (eachChar == ' ') {
+      (*wordIdx++)[1] = inputIdx - inputChar - 1;
+      (*wordIdx)[0] = inputIdx - inputChar + 1;
+    } else {}
   }
 
-  int max, min;
-  max = min = *inputA;
-
-  max_min(inputA, p, &max, &min);
-
-  printf("Maximum is %d \n", max);
-  printf("Minimum is %d \n", min);
+  RevPrint(inputChar, word, wordIdx);
+  printf("%c\n", endChar);
 
   return 0;
 }
 
-void max_min(int *a, int *last, int *max, int *min) {
 
-  for (int *p = a; p < last; ++p) {
-    if (*p > *max) {
-      *max = *p;
+void RevPrint(int *charAarry, int (*word)[2], int (*last)[2]) {
+
+  int (*wordIdx)[2];
+  int *charIdx;
+
+  for (wordIdx = last; wordIdx >= word; --wordIdx) {
+    for (charIdx = charAarry + (*wordIdx)[0];
+         charIdx <= charAarry + (*wordIdx)[1];
+         ++charIdx) {
+      putchar(*charIdx);
     }
-    else if (*p < *min) {
-      *min = *p;
-    }
-    else {}
+
+    if (wordIdx != word) {
+      putchar(' ');
+    } else {}
   }
+
 }
