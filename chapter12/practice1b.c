@@ -19,10 +19,8 @@ int main(void)
 
 void RevPrint(int *a, int *last) {
 
-  int *p;
-
-  for (p = last; p >= a ; --p) {
-    putchar(*p);
+  for (; last >= a; --last) {
+    putchar(*last);
   }
 
   printf("\n");

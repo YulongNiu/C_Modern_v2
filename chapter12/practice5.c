@@ -16,7 +16,7 @@ int main(void)
   int max, min;
   max = min = *inputA;
 
-  max_min(inputA, p, &max, &min);
+  max_min(inputA, p - 1, &max, &min);
 
   printf("Maximum is %d \n", max);
   printf("Minimum is %d \n", min);
@@ -26,12 +26,12 @@ int main(void)
 
 void max_min(int *a, int *last, int *max, int *min) {
 
-  for (int *p = a; p < last; ++p) {
-    if (*p > *max) {
-      *max = *p;
+  for (;a <= last; ++a) {
+    if (*a > *max) {
+      *max = *a;
     }
-    else if (*p < *min) {
-      *min = *p;
+    else if (*a < *min) {
+      *min = *a;
     }
     else {}
   }

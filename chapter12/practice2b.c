@@ -9,7 +9,7 @@ int main(void)
 {
   int a[INPUTLEN];
   int *index = a;
-  char eachInput;
+  int eachInput;
 
   do {
     eachInput = getchar();
@@ -23,7 +23,7 @@ int main(void)
   IsPalindrome(a, index - 1);
 
   for (int *start = a; start < index; ++start) {
-    printf("%c", *start);
+    putchar(*start);
   }
   printf("\n");
 
@@ -33,8 +33,8 @@ int main(void)
 
 void IsPalindrome(int *a, int *last) {
 
-  for (int *p = a; p <= a + (last - a) / 2; ++p) {
-    if (*p != *(last - (p - a))) {
+  for (; a < last; ++a, --last) {
+    if (*a != *last) {
       printf("Not a palindrome\n");
       return;
     } else {}
