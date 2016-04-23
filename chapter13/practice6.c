@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #define MAXLEN 30
 #define PNUM 6
 
-void ToLowerStr(char *a, char lowStr[]);
+bool StrEqual(char *plant, char *s);
 
 int main(int argc, char *argv[]) {
 
@@ -15,13 +15,10 @@ int main(int argc, char *argv[]) {
 
   for (char **p = argv + 1; *p != NULL; ++p) {
 
-    char stdP[MAXLEN];
-
-    ToLowerStr(*p, stdP);
-
     int i = 0;
+
     for (; i < PNUM; ++i) {
-      if (strcmp(stdP, planets[i]) == 0) {
+      if (StrEqual(planets[i], *p)) {
         printf("%s is the planet %d. \n", *p, i + 1);
         break;
       } else {}
@@ -33,19 +30,18 @@ int main(int argc, char *argv[]) {
 
   }
 
+  putchar(toupper('\0'));
+
   return 0;
 }
 
-void ToLowerStr(char *a, char lowStr[]) {
+bool StrEqual(char *plant, char *s) {
 
-  int i = 1;
-
-  lowStr[0] = toupper(a[0]);
-
-  for (; a[i]; ++i) {
-    lowStr[i] = tolower(a[i]);
+  for (int i = 0; toupper(plant[i]) == toupper(s[i]); ++i) {
+    if (plant[i] == '\0') {
+      return true;
+    } else {}
   }
 
-  lowStr[i] = '\0';
-
+  return false;
 }
